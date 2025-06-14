@@ -1,31 +1,29 @@
 
 import React, { useRef, useEffect } from 'react';
 
-// Hook para contagem animada
-function useCountUp(to: number, duration = 1200, decimal = false) {
+// Novo hook para contagem animada bem visível
+function useAnimatedCountUp(to: number, duration = 1200, decimal = false) {
   const ref = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    let start = 0;
     let raf: number;
-    let startTime: number | null = null;
+    const startTime = performance.now();
     const dec = decimal ? 1 : 0;
-    const animate = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      const progress = Math.min((timestamp - startTime) / duration, 1);
-      const current = decimal
-        ? (progress * to)
+    function step(now: number) {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const value = decimal
+        ? +(progress * to)
         : Math.floor(progress * to);
       if (ref.current) {
-        ref.current.innerText = decimal ? current.toFixed(1) : `${current}`;
+        ref.current.innerText = decimal ? value.toFixed(1) : `${value}`;
       }
       if (progress < 1) {
-        raf = requestAnimationFrame(animate);
+        raf = requestAnimationFrame(step);
       } else if (ref.current) {
         ref.current.innerText = decimal ? to.toFixed(1) : `${to}`;
       }
-    };
-    raf = requestAnimationFrame(animate);
+    }
+    raf = requestAnimationFrame(step);
     return () => cancelAnimationFrame(raf);
   }, [to, duration, decimal]);
 
@@ -33,9 +31,9 @@ function useCountUp(to: number, duration = 1200, decimal = false) {
 }
 
 const AboutSection = () => {
-  const anosRef = useCountUp(10, 1200);
-  const cafesRef = useCountUp(50, 1200);
-  const avaliacaoRef = useCountUp(4.5, 1300, true);
+  const anosRef = useAnimatedCountUp(10, 1200);
+  const cafesRef = useAnimatedCountUp(50, 1200);
+  const avaliacaoRef = useAnimatedCountUp(4.5, 1300, true);
 
   return (
     <section

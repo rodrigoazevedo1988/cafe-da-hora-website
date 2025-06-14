@@ -1,6 +1,7 @@
 
 import React from 'react';
 
+// Troquei a foto da Ana Clara por uma URL funcional
 const testimonials = [
   {
     id: 1,
@@ -20,7 +21,7 @@ const testimonials = [
     id: 3,
     name: 'Ana Clara',
     feedback: 'Adoro o ambiente do Keys Café! Perfeito para relaxar e saborear um bom café. Os funcionários são muito atenciosos e os produtos de alta qualidade.',
-    image: 'https://images.unsplash.com/photo-1570295999919-56ceb7e86ef3?w=200&h=200&fit=facearea&facepad=2&q=80',
+    image: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=200&h=200&fit=facearea&facepad=2&q=80',
     rating: 5,
   },
 ];

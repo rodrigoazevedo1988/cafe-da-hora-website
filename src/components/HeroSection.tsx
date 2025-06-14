@@ -2,9 +2,9 @@
 import AnimatedCoffeeIcon from "./AnimatedCoffeeIcon";
 import { ArrowDown } from "lucide-react";
 
-// Imagem de café quente para background — usar imagem relevante do projeto
+// Nova imagem real de café quente (Unsplash - coffee steam)
 const coffeeBg =
-  "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?auto=format&fit=crop&w=1600&q=80";
+  "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80";
 
 const HeroSection = () => {
   const scrollToProducts = () => {
@@ -20,14 +20,13 @@ const HeroSection = () => {
       className="relative min-h-screen flex items-center justify-center bg-coffee-100"
       role="banner"
       style={{
-        backgroundImage: `linear-gradient(rgba(252,245,236,0.86), rgba(193,158,117,0.33)), url('${coffeeBg}')`,
+        backgroundImage: `linear-gradient(rgba(252,245,236,0.84), rgba(193,158,117,0.30)), url('${coffeeBg}')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
-      <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden="true" />
-      {/* Ícone animado café */}
-      <div className="absolute top-28 left-1/2 -translate-x-1/2 z-10">
+      {/* Ícone animado de café centralizado */}
+      <div className="absolute top-24 left-1/2 -translate-x-1/2 z-10">
         <AnimatedCoffeeIcon />
       </div>
       <a
@@ -36,7 +35,7 @@ const HeroSection = () => {
       >
         Pular para o conteúdo principal
       </a>
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
         <h1 className="font-playfair text-4xl sm:text-5xl lg:text-6xl xl:text-hero font-bold text-coffee-800 drop-shadow-lg mb-6 animate-fade-slide-in animation-delay-200">
           O melhor café que você poderia tomar
         </h1>
@@ -68,4 +67,3 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
-
