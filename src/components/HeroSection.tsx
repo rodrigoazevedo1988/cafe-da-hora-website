@@ -1,5 +1,5 @@
 
-import AnimatedCoffeeIcon from "./AnimatedCoffeeIcon";
+import { Coffee } from "lucide-react";
 
 const HeroSection = () => {
   const scrollToProducts = () => {
@@ -15,16 +15,12 @@ const HeroSection = () => {
       className="relative min-h-screen flex items-center justify-center bg-coffee-100"
       role="banner"
       style={{
-        backgroundImage: `linear-gradient(rgba(139,69,19,0.4), rgba(139,69,19,0.2)), url('/lovable-uploads/3890bd39-aa94-487d-b6fb-34bf47474fb7.png')`,
+        backgroundImage: `linear-gradient(rgba(139,69,19,0.4), rgba(139,69,19,0.2)), url('/lovable-uploads/0dd1a5ee-2e2d-45f2-9abe-805bc3c0d8b4.png')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
     >
-      {/* Ícone animado de café centralizado */}
-      <div className="absolute top-24 left-1/2 -translate-x-1/2 z-10">
-        <AnimatedCoffeeIcon />
-      </div>
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-coffee-500 text-white px-4 py-2 rounded-md z-50"
