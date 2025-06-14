@@ -8,23 +8,39 @@ function useAnimatedCountUp(to: number, duration = 1200, decimal = false) {
   useEffect(() => {
     let raf: number;
     const startTime = performance.now();
-    function step(now: number) {
-      const progress = Math.min((now - startTime) / duration, 1);
-      let value = decimal
-        ? +(progress * to)
-        : Math.floor(progress * to);
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          function step(now: number) {
+            const progress = Math.min((now - startTime) / duration, 1);
+            let value = decimal
+              ? +(progress * to)
+              : Math.floor(progress * to);
 
-      if (ref.current) {
-        ref.current.innerText = decimal ? value.toFixed(1) : `${value}`;
-      }
-      if (progress < 1) {
-        raf = requestAnimationFrame(step);
-      } else if (ref.current) {
-        ref.current.innerText = decimal ? to.toFixed(1) : `${to}`;
-      }
+            if (ref.current) {
+              ref.current.innerText = decimal ? value.toFixed(1) : `${value}`;
+            }
+            if (progress < 1) {
+              raf = requestAnimationFrame(step);
+            } else if (ref.current) {
+              ref.current.innerText = decimal ? to.toFixed(1) : `${to}`;
+            }
+          }
+          raf = requestAnimationFrame(step);
+          observer.disconnect();
+        }
+      });
+    });
+
+    if (ref.current) {
+      observer.observe(ref.current);
     }
-    raf = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(raf);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      observer.disconnect();
+    };
   }, [to, duration, decimal]);
 
   return ref;
