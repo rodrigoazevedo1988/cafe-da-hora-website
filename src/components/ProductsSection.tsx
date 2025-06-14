@@ -73,16 +73,16 @@ const ProductsSection = () => {
         {/* Products Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {products.map((product, index) => (
-            <article 
-              key={product.id} 
-              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-500 group animate-fade-in-up hover:animate-wiggle"
+            <article
+              key={product.id}
+              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 group animate-fade-in-up hover:animate-scale-up"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <div className="relative overflow-hidden">
                 <img
                   src={product.image}
                   alt={`${product.name} - ${product.description}`}
-                  className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500 animate-fade-in"
+                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500 animate-fade-in"
                   loading="lazy"
                   width="400"
                   height="300"
@@ -93,7 +93,7 @@ const ProductsSection = () => {
                   </span>
                 </div>
               </div>
-              
+
               <div className="p-6">
                 <h3 className="font-playfair text-xl font-semibold text-gray-900 mb-3 group-hover:text-coffee-500 transition-colors duration-300">
                   {product.name}
@@ -101,12 +101,12 @@ const ProductsSection = () => {
                 <p className="font-inter text-gray-700 mb-4 leading-relaxed group-hover:text-gray-900 transition-colors duration-300">
                   {product.description}
                 </p>
-                
+
                 <div className="flex justify-between items-center">
                   <span className="font-inter text-2xl font-bold text-coffee-500 animate-price-highlight">
                     {product.price}
                   </span>
-                  <button 
+                  <button
                     className="bg-coffee-500 hover:bg-coffee-600 text-white p-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-coffee-500 focus:ring-offset-2 hover:scale-110 animate-bounce-subtle hover:animate-spin-once"
                     aria-label={`Adicionar ${product.name} ao carrinho`}
                   >

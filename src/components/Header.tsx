@@ -1,9 +1,36 @@
 
 import { useState } from 'react';
-import { Menu, Coffee, X } from 'lucide-react';
+import { Menu, Coffee, X, Moon, Sun } from 'lucide-react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [dark, setDark] = useState(
+    typeof window !== "undefined" && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  );
+
+  // Alternar tema (dark/light)
+  const toggleTheme = () => {
+    const root = window.document.documentElement;
+    if (dark) {
+      root.classList.remove("dark");
+      localStorage.theme = 'light';
+      setDark(false);
+    } else {
+      root.classList.add("dark");
+      localStorage.theme = 'dark';
+      setDark(true);
+    }
+  };
+
+  // Aplica o tema salvo ao montar o componente (client only)
+  if (typeof window !== 'undefined') {
+    if (localStorage.theme === 'dark') {
+      window.document.documentElement.classList.add('dark');
+    }
+    if (localStorage.theme === 'light') {
+      window.document.documentElement.classList.remove('dark');
+    }
+  }
 
   const navigationItems = [
     { name: 'Início', href: '#home' },
@@ -22,7 +49,7 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-white shadow-lg sticky top-0 z-50 animate-slide-down" role="banner">
+    <header className="bg-white dark:bg-coffee-900 shadow-lg sticky top-0 z-50 animate-slide-down" role="banner">
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8" role="navigation" aria-label="Menu principal">
         <div className="flex justify-between items-center h-16 md:h-20">
           {/* Logo */}
@@ -30,9 +57,15 @@ const Header = () => {
             <div className="bg-coffee-500 p-2 rounded-full hover:bg-coffee-600 transition-all duration-300 hover:scale-110 hover:rotate-12">
               <Coffee className="h-6 w-6 text-white animate-pulse" aria-hidden="true" />
             </div>
-            <h1 className="font-playfair text-2xl md:text-3xl font-bold text-coffee-500 hover:text-coffee-600 transition-colors duration-300">
+            {/* Nome da cafeteria CLIQUE PARA TOPO */}
+            <button
+              onClick={() => scrollToSection('#home')}
+              className="font-playfair text-2xl md:text-3xl font-bold text-coffee-500 dark:text-coffee-100 hover:text-coffee-600 dark:hover:text-coffee-300 transition-colors duration-300 bg-transparent border-0 cursor-pointer focus:outline-none"
+              aria-label="Voltar ao início do site"
+              style={{ padding: 0 }}
+            >
               Keys Café
-            </h1>
+            </button>
           </div>
 
           {/* Desktop Navigation */}
@@ -41,12 +74,24 @@ const Header = () => {
               <button
                 key={item.name}
                 onClick={() => scrollToSection(item.href)}
-                className="text-gray-700 hover:text-coffee-500 font-inter font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-coffee-500 focus:ring-offset-2 rounded-md px-2 py-1 hover:scale-105 animate-fade-in-up"
+                className="text-gray-700 dark:text-gray-200 hover:text-coffee-500 dark:hover:text-coffee-300 font-inter font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-coffee-500 focus:ring-offset-2 rounded-md px-2 py-1 hover:scale-105 animate-fade-in-up"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 {item.name}
               </button>
             ))}
+            {/* Switch de Tema */}
+            <button
+              className="ml-4 p-2 rounded-full transition-all duration-300 hover:bg-coffee-100 dark:hover:bg-coffee-800 focus:outline-none focus:ring-2 focus:ring-coffee-500 hover:scale-110"
+              aria-label="Alternar tema claro/escuro"
+              onClick={toggleTheme}
+            >
+              {dark ? (
+                <Sun className="h-5 w-5 text-yellow-400 animate-spin-once" aria-hidden="true" />
+              ) : (
+                <Moon className="h-5 w-5 text-coffee-500 animate-bounce-subtle" aria-hidden="true" />
+              )}
+            </button>
           </div>
 
           {/* Mobile menu button */}
@@ -67,8 +112,8 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div 
-            id="mobile-menu" 
+          <div
+            id="mobile-menu"
             className="md:hidden pb-4 animate-slide-down"
           >
             <div className="flex flex-col space-y-2">
@@ -76,12 +121,24 @@ const Header = () => {
                 <button
                   key={item.name}
                   onClick={() => scrollToSection(item.href)}
-                  className="text-left px-4 py-2 text-gray-700 hover:text-coffee-500 hover:bg-gray-50 font-inter font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-coffee-500 focus:ring-offset-2 rounded-md hover:translate-x-2 animate-fade-in-left"
+                  className="text-left px-4 py-2 text-gray-700 dark:text-gray-200 hover:text-coffee-500 hover:bg-gray-50 dark:hover:bg-coffee-800 font-inter font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-coffee-500 focus:ring-offset-2 rounded-md hover:translate-x-2 animate-fade-in-left"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   {item.name}
                 </button>
               ))}
+              {/* Theme switch on mobile menu */}
+              <button
+                className="mt-2 w-min p-2 rounded-full transition-all duration-300 hover:bg-coffee-100 dark:hover:bg-coffee-800 focus:outline-none focus:ring-2 focus:ring-coffee-500 hover:scale-110"
+                aria-label="Alternar tema claro/escuro"
+                onClick={toggleTheme}
+              >
+                {dark ? (
+                  <Sun className="h-5 w-5 text-yellow-400 animate-spin-once" aria-hidden="true" />
+                ) : (
+                  <Moon className="h-5 w-5 text-coffee-500 animate-bounce-subtle" aria-hidden="true" />
+                )}
+              </button>
             </div>
           </div>
         )}

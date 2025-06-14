@@ -1,5 +1,49 @@
 
 import { Star } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+
+// AnimatedNumber component para contagem animada
+const AnimatedNumber = ({
+  value,
+  duration = 1600,
+  decimals = 0,
+  isFloat = false,
+  children
+}: {
+  value: number,
+  duration?: number,
+  decimals?: number,
+  isFloat?: boolean,
+  children?: React.ReactNode
+}) => {
+  const [display, setDisplay] = useState(0);
+
+  useEffect(() => {
+    let start = 0;
+    const startTime = performance.now();
+    const animate = (curTime: number) => {
+      const timePassed = curTime - startTime;
+      const progress = Math.min(timePassed / duration, 1);
+      const next = isFloat
+        ? +(start + (value - start) * progress).toFixed(decimals)
+        : Math.floor(start + (value - start) * progress);
+
+      setDisplay(next);
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    };
+    requestAnimationFrame(animate);
+    // eslint-disable-next-line
+  }, [value, duration]);
+
+  return (
+    <span className="font-playfair text-4xl lg:text-5xl font-bold text-coffee-500 mb-2 animate-count-up hover:animate-pulse">
+      {display}
+      {children}
+    </span>
+  );
+};
 
 const TestimonialsSection = () => {
   const testimonials = [
@@ -9,7 +53,8 @@ const TestimonialsSection = () => {
       location: 'São Paulo, SP',
       rating: 5,
       comment: 'O melhor café que já tomei na vida! O ambiente do Keys Café é acolhedor e o atendimento é excepcional. Recomendo a todos!',
-      avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=80&h=80&fit=crop&auto=format&q=80'
+      // NOVA IMAGEM usando outra do Unsplash
+      avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=80&h=80&fit=crop&auto=format&q=80'
     },
     {
       id: 2,
@@ -41,18 +86,18 @@ const TestimonialsSection = () => {
   };
 
   return (
-    <section id="testimonials" className="py-16 lg:py-24 bg-white animate-fade-in-on-scroll" aria-labelledby="testimonials-title">
+    <section id="testimonials" className="py-16 lg:py-24 bg-white dark:bg-coffee-900 animate-fade-in-on-scroll" aria-labelledby="testimonials-title">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16 animate-fade-in-up">
-          <h2 
+          <h2
             id="testimonials-title"
             className="font-playfair text-3xl lg:text-section-title font-semibold text-coffee-500 mb-6 animate-typing"
           >
             O que nossos clientes dizem
           </h2>
-          <p className="font-inter text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed animate-fade-in-up animation-delay-200">
-            A satisfação dos nossos clientes é nossa maior recompensa. Veja o que eles têm a dizer 
+          <p className="font-inter text-lg text-gray-700 dark:text-coffee-100 max-w-3xl mx-auto leading-relaxed animate-fade-in-up animation-delay-200">
+            A satisfação dos nossos clientes é nossa maior recompensa. Veja o que eles têm a dizer
             sobre a experiência no Keys Café.
           </p>
         </div>
@@ -60,9 +105,9 @@ const TestimonialsSection = () => {
         {/* Testimonials Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
-            <article 
+            <article
               key={testimonial.id}
-              className="bg-coffee-50 rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-500 animate-fade-in-up hover:animate-float"
+              className="bg-coffee-50 dark:bg-coffee-800 rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-500 animate-fade-in-up hover:animate-float"
               style={{ animationDelay: `${index * 200}ms` }}
             >
               {/* Rating */}
@@ -71,7 +116,7 @@ const TestimonialsSection = () => {
               </div>
 
               {/* Comment */}
-              <blockquote className="font-inter text-gray-700 mb-6 leading-relaxed animate-fade-in-up animation-delay-300">
+              <blockquote className="font-inter text-gray-700 dark:text-coffee-100 mb-6 leading-relaxed animate-fade-in-up animation-delay-300">
                 "{testimonial.comment}"
               </blockquote>
 
@@ -80,16 +125,16 @@ const TestimonialsSection = () => {
                 <img
                   src={testimonial.avatar}
                   alt={`Foto de ${testimonial.name}`}
-                  className="w-12 h-12 rounded-full object-cover mr-4 hover:scale-110 transition-transform duration-300 animate-fade-in"
+                  className="w-12 h-12 rounded-full object-cover mr-4 hover:scale-110 transition-transform duration-300 animate-fade-in bg-gray-100 dark:bg-coffee-900"
                   loading="lazy"
                   width="48"
                   height="48"
                 />
                 <div>
-                  <cite className="font-inter font-semibold text-gray-900 not-italic hover:text-coffee-500 transition-colors duration-300">
+                  <cite className="font-inter font-semibold text-gray-900 dark:text-white not-italic hover:text-coffee-500 transition-colors duration-300">
                     {testimonial.name}
                   </cite>
-                  <p className="font-inter text-sm text-gray-600">
+                  <p className="font-inter text-sm text-gray-600 dark:text-coffee-200">
                     {testimonial.location}
                   </p>
                 </div>
@@ -98,23 +143,24 @@ const TestimonialsSection = () => {
           ))}
         </div>
 
-        {/* Stats */}
+        {/* Stats com ANIMAÇÃO COUNT-UP */}
         <div className="mt-16 grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-          {[
-            { number: '15+', label: 'Anos de tradição' },
-            { number: '50k+', label: 'Clientes satisfeitos' },
-            { number: '200+', label: 'Tipos de café' },
-            { number: '4.9★', label: 'Avaliação média' }
-          ].map((stat, index) => (
-            <div key={index} className="animate-fade-in-up hover:animate-bounce-subtle" style={{ animationDelay: `${600 + index * 100}ms` }}>
-              <div className="font-playfair text-4xl lg:text-5xl font-bold text-coffee-500 mb-2 animate-count-up hover:animate-pulse">
-                {stat.number}
-              </div>
-              <div className="font-inter text-gray-700">
-                {stat.label}
-              </div>
-            </div>
-          ))}
+          <div className="animate-fade-in-up hover:animate-bounce-subtle" style={{ animationDelay: `600ms` }}>
+            <AnimatedNumber value={15} duration={1600}>+</AnimatedNumber>
+            <div className="font-inter text-gray-700 dark:text-coffee-100">Anos de tradição</div>
+          </div>
+          <div className="animate-fade-in-up hover:animate-bounce-subtle" style={{ animationDelay: `700ms` }}>
+            <AnimatedNumber value={50000} duration={1600}>k+</AnimatedNumber>
+            <div className="font-inter text-gray-700 dark:text-coffee-100">Clientes satisfeitos</div>
+          </div>
+          <div className="animate-fade-in-up hover:animate-bounce-subtle" style={{ animationDelay: `800ms` }}>
+            <AnimatedNumber value={200} duration={1600}>+</AnimatedNumber>
+            <div className="font-inter text-gray-700 dark:text-coffee-100">Tipos de café</div>
+          </div>
+          <div className="animate-fade-in-up hover:animate-bounce-subtle" style={{ animationDelay: `900ms` }}>
+            <AnimatedNumber value={4.9} isFloat decimals={1} duration={1600}><Star className="inline-block mx-1 -mt-1 text-coffee-500 fill-current" /></AnimatedNumber>
+            <div className="font-inter text-gray-700 dark:text-coffee-100">Avaliação média</div>
+          </div>
         </div>
       </div>
     </section>
