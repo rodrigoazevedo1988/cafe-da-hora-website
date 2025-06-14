@@ -614,4 +614,55 @@
       filter: blur(0px);
     }
   }
+
+  /* Sutileza extra para fade-slide-in (entrada de textos) */
+  .animate-fade-slide-in {
+    animation: fade-slide-in 0.8s cubic-bezier(0.24, 0.87, 0.46, 0.99) both;
+  }
+  @keyframes fade-slide-in {
+    0% {
+      opacity: 0;
+      transform: translateY(24px) scale(0.96);
+      letter-spacing: 0.08em;
+    }
+    60% {
+      opacity: 0.8;
+      transform: translateY(-2px) scale(1.03);
+      letter-spacing: 0em;
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      letter-spacing: 0em;
+    }
+  }
+
+  /* Para count-up highlight */
+  .animate-count-up-highlight {
+    animation: count-up-highlight 1.3s cubic-bezier(0.19, 1, 0.22, 1) both;
+  }
+  @keyframes count-up-highlight {
+    0% { opacity: 0.2; transform: scale(0.8) translateY(24px); filter: blur(3px);}
+    55% { opacity: 0.85; filter: blur(0.8px);}
+    100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0);}
+  }
+
+  /* Coffee steam animation */
+  .animate-coffee-steam {
+    animation: coffee-steam-pop 3s ease-in-out infinite alternate;
+  }
+  @keyframes coffee-steam-pop {
+    0% { filter: drop-shadow(0px 0px 0px #fff0); }
+    30% { filter: drop-shadow(0px -6px 24px #eadbbd80);}
+    100% { filter: drop-shadow(0px -16px 32px #eadbbd90);}
+  }
+
+  .animate-steam-blur {
+    animation: steam-blur 2.5s ease-in-out infinite alternate;
+  }
+  @keyframes steam-blur {
+    0% {opacity: 0.28; filter: blur(1.5px);}
+    60% {opacity: 0.6; filter: blur(3.2px);}
+    100% {opacity: 0.18; filter: blur(1.8px);}
+  }
 }

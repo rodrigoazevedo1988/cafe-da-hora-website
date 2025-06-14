@@ -57,14 +57,14 @@ const ProductsSection = () => {
     <section id="products" className="py-16 lg:py-24 bg-coffee-50 animate-fade-in-on-scroll" aria-labelledby="products-title">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16 animate-fade-in-up">
-          <h2 
+        <div className="text-center mb-16 animate-fade-slide-in">
+          <h2
             id="products-title"
-            className="font-playfair text-3xl lg:text-section-title font-semibold text-coffee-500 mb-6 animate-typing"
+            className="font-playfair text-3xl lg:text-section-title font-semibold text-coffee-500 mb-6 animate-fade-slide-in"
           >
             Nossos Produtos
           </h2>
-          <p className="font-inter text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed animate-fade-in-up animation-delay-200">
+          <p className="font-inter text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed animate-fade-slide-in animation-delay-200">
             Descubra nossa seleção cuidadosamente preparada de cafés especiais, bebidas artesanais 
             e deliciosos acompanhamentos, todos feitos com ingredientes de primeira qualidade no Keys Café.
           </p>
@@ -75,19 +75,19 @@ const ProductsSection = () => {
           {products.map((product, index) => (
             <article
               key={product.id}
-              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 group animate-fade-in-up hover:animate-scale-up"
-              style={{ animationDelay: `${index * 100}ms` }}
+              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 group animate-fade-slide-in"
+              style={{ animationDelay: `${index * 120}ms` }}
             >
               <div className="relative overflow-hidden">
                 <img
                   src={product.image}
                   alt={`${product.name} - ${product.description}`}
-                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500 animate-fade-in"
+                  className="w-full h-48 object-cover group-hover:scale-103 group-hover:brightness-105 transition-transform duration-500 animate-fade-in"
                   loading="lazy"
                   width="400"
                   height="300"
                 />
-                <div className="absolute top-4 left-4 animate-slide-in-left">
+                <div className="absolute top-4 left-4 animate-fade-in">
                   <span className="bg-coffee-500 text-white px-3 py-1 rounded-full text-sm font-inter font-medium animate-pulse-subtle">
                     {product.category}
                   </span>
@@ -95,10 +95,10 @@ const ProductsSection = () => {
               </div>
 
               <div className="p-6">
-                <h3 className="font-playfair text-xl font-semibold text-gray-900 mb-3 group-hover:text-coffee-500 transition-colors duration-300">
+                <h3 className="font-playfair text-xl font-semibold text-gray-900 mb-3 group-hover:text-coffee-500 transition-colors duration-300 animate-fade-slide-in">
                   {product.name}
                 </h3>
-                <p className="font-inter text-gray-700 mb-4 leading-relaxed group-hover:text-gray-900 transition-colors duration-300">
+                <p className="font-inter text-gray-700 mb-4 leading-relaxed group-hover:text-gray-900 transition-colors duration-300 animate-fade-slide-in animation-delay-300">
                   {product.description}
                 </p>
 
@@ -107,10 +107,12 @@ const ProductsSection = () => {
                     {product.price}
                   </span>
                   <button
-                    className="bg-coffee-500 hover:bg-coffee-600 text-white p-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-coffee-500 focus:ring-offset-2 hover:scale-110 animate-bounce-subtle hover:animate-spin-once"
+                    className="bg-coffee-500 hover:bg-coffee-600 text-white p-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-coffee-500 focus:ring-offset-2 hover:scale-110 animate-bounce-subtle"
                     aria-label={`Adicionar ${product.name} ao carrinho`}
                   >
-                    <ShoppingCart className="h-5 w-5" aria-hidden="true" />
+                    <svg width="20" height="20" fill="none" className="inline-block" aria-hidden="true">
+                      <use xlinkHref="#shopping-cart" />
+                    </svg>
                   </button>
                 </div>
               </div>
@@ -119,7 +121,7 @@ const ProductsSection = () => {
         </div>
 
         {/* CTA */}
-        <div className="text-center mt-12 animate-fade-in-up animation-delay-800">
+        <div className="text-center mt-12 animate-fade-slide-in animation-delay-800">
           <button className="bg-navy-500 hover:bg-navy-600 text-white font-inter font-semibold px-8 py-4 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-navy-500 focus:ring-offset-2 shadow-lg animate-pulse-glow hover:animate-none">
             Ver Cardápio Completo
           </button>
