@@ -34,7 +34,7 @@ function useAnimatedCountUp(to: number, duration = 1200, decimal = false) {
           observer.disconnect();
         }
       });
-    });
+    }, { threshold: 0.5 });
 
     if (ref.current) {
       observer.observe(ref.current);
