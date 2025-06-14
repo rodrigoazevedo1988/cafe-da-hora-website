@@ -2,11 +2,9 @@
 import AnimatedCoffeeIcon from "./AnimatedCoffeeIcon";
 import { ArrowDown } from "lucide-react";
 
-// Foto realista de café quente com vapor (Unsplash)
+// FOTO REALISTA café fumegante (Unsplash)
 const coffeeBg =
   "https://images.unsplash.com/photo-1525107386315-9e59d238c1c7?auto=format&fit=crop&w=1600&q=80";
-// alternativa backup: xícara
-// "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1600&q=80"
 
 const HeroSection = () => {
   const scrollToProducts = () => {
@@ -22,7 +20,7 @@ const HeroSection = () => {
       className="relative min-h-screen flex items-center justify-center bg-coffee-100"
       role="banner"
       style={{
-        backgroundImage: `linear-gradient(rgba(252,245,236,0.80), rgba(193,158,117,0.23)), url('${coffeeBg}')`,
+        backgroundImage: `linear-gradient(rgba(252,245,236,0.87), rgba(193,158,117,0.15)), url('${coffeeBg}')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
