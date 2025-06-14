@@ -54,7 +54,7 @@ const ProductsSection = () => {
   ];
 
   return (
-    <section id="products" className="py-16 lg:py-24 bg-coffee-50 animate-fade-in-on-scroll" aria-labelledby="products-title">
+    <section id="products" className="py-16 lg:py-24 bg-coffee-50" aria-labelledby="products-title">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16 animate-fade-slide-in">
@@ -75,14 +75,14 @@ const ProductsSection = () => {
           {products.map((product, index) => (
             <article
               key={product.id}
-              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 group animate-fade-slide-in"
+              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 group animate-fade-slide-in hover:scale-105"
               style={{ animationDelay: `${index * 120}ms` }}
             >
               <div className="relative overflow-hidden">
                 <img
                   src={product.image}
                   alt={`${product.name} - ${product.description}`}
-                  className="w-full h-48 object-cover group-hover:scale-103 group-hover:brightness-105 transition-transform duration-500 animate-fade-in"
+                  className="w-full h-48 object-cover group-hover:brightness-105 transition-transform duration-500 animate-fade-in"
                   loading="lazy"
                   width="400"
                   height="300"
@@ -110,9 +110,7 @@ const ProductsSection = () => {
                     className="bg-coffee-500 hover:bg-coffee-600 text-white p-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-coffee-500 focus:ring-offset-2 hover:scale-110 animate-bounce-subtle"
                     aria-label={`Adicionar ${product.name} ao carrinho`}
                   >
-                    <svg width="20" height="20" fill="none" className="inline-block" aria-hidden="true">
-                      <use xlinkHref="#shopping-cart" />
-                    </svg>
+                    <ShoppingCart className="w-5 h-5" />
                   </button>
                 </div>
               </div>

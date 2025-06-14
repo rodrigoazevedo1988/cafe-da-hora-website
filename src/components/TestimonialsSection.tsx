@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 const testimonials = [
@@ -5,27 +6,27 @@ const testimonials = [
     id: 1,
     name: 'Maria Silva',
     feedback: 'Um lugar incrível! O Keys Café tem os melhores grãos que já provei. Atendimento impecável e ambiente super aconchegante. Recomendo para todos os amantes de café!',
-    image: 'https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=200&h=200&fit=facearea&facepad=2&q=80', // nova imagem realista
+    image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=200&h=200&fit=facearea&facepad=2&q=80', // nova imagem realista
     rating: 5,
   },
   {
     id: 2,
     name: 'João Pereira',
     feedback: 'O melhor cappuccino que já tomei! O Keys Café superou minhas expectativas. Ambiente agradável e serviço de alta qualidade.',
-    image: 'https://images.unsplash.com/photo-1589571894960-20c64a5e588c?w=200&h=200&fit=facearea&facepad=2&q=80', // nova imagem realista
+    image: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=200&h=200&fit=facearea&facepad=2&q=80', // imagem nova de rosto masculino
     rating: 4,
   },
   {
     id: 3,
     name: 'Ana Clara',
     feedback: 'Adoro o ambiente do Keys Café! Perfeito para relaxar e saborear um bom café. Os funcionários são muito atenciosos e os produtos de alta qualidade.',
-    image: 'https://images.unsplash.com/photo-1570295999919-56ceb7e86ef3?w=200&h=200&fit=facearea&facepad=2&q=80', // nova imagem realista
+    image: 'https://images.unsplash.com/photo-1570295999919-56ceb7e86ef3?w=200&h=200&fit=facearea&facepad=2&q=80', // imagem realista
     rating: 5,
   },
 ];
 
 const TestimonialsSection = () => (
-  <section id="testimonials" className="py-20 bg-white animate-fade-in-on-scroll" aria-labelledby="testimonials-title">
+  <section id="testimonials" className="py-20 bg-white" aria-labelledby="testimonials-title">
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h2 id="testimonials-title" className="font-playfair text-3xl lg:text-section-title font-bold text-coffee-600 mb-12 animate-fade-slide-in">
         Depoimentos

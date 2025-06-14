@@ -13,12 +13,12 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center bg-gradient-to-r from-coffee-50 to-coffee-100 animate-gradient-shift"
+      className="relative min-h-screen flex items-center justify-center bg-gradient-to-r from-coffee-50 to-coffee-100"
       role="banner"
     >
       {/* Imagem de Fundo */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20 animate-ken-burns"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
         style={{
           backgroundImage: `url('https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?w=1920&h=1080&fit=crop&auto=format&q=80')`
         }}
