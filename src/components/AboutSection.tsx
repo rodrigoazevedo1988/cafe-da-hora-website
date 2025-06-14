@@ -10,7 +10,6 @@ function useCountUp(to: number, duration = 1200, decimal = false) {
     let raf: number;
     let startTime: number | null = null;
     const dec = decimal ? 1 : 0;
-
     const animate = (timestamp: number) => {
       if (!startTime) startTime = timestamp;
       const progress = Math.min((timestamp - startTime) / duration, 1);
@@ -58,19 +57,19 @@ const AboutSection = () => {
         <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
           <div className="flex-1 animate-fade-slide-in animation-delay-600">
             <strong className="text-3xl text-coffee-500 block font-playfair mb-2 animate-count-up-highlight">
-              +<span ref={anosRef} />
+              +<span ref={anosRef} className="animate-fade-slide-in" />
             </strong>
             <span className="text-gray-800 font-inter font-semibold">anos de tradição</span>
           </div>
           <div className="flex-1 animate-fade-slide-in animation-delay-800">
             <strong className="text-3xl text-coffee-500 block font-playfair mb-2 animate-count-up-highlight">
-              +<span ref={cafesRef} />
+              +<span ref={cafesRef} className="animate-fade-slide-in" />
             </strong>
             <span className="text-gray-800 font-inter font-semibold">cafés e receitas</span>
           </div>
           <div className="flex-1 animate-fade-slide-in animation-delay-1000">
             <strong className="text-3xl text-coffee-500 block font-playfair mb-2 animate-count-up-highlight">
-              +<span ref={avaliacaoRef} />
+              +<span ref={avaliacaoRef} className="animate-fade-slide-in" />
             </strong>
             <span className="text-gray-800 font-inter font-semibold">de avaliação</span>
           </div>

@@ -2,7 +2,7 @@
 import React from 'react';
 
 const Footer = () => (
-  <footer className="py-7 bg-[#233e93]">
+  <footer className="py-7 bg-coffee-500">
     <div className="container mx-auto px-6 flex flex-col md:flex-row md:items-center md:justify-between">
       <div className="flex items-center mb-4 md:mb-0">
         <span className="font-playfair text-3xl text-white mr-8">Keys Café</span>

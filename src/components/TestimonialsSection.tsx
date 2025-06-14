@@ -13,7 +13,7 @@ const testimonials = [
     id: 2,
     name: 'João Pereira',
     feedback: 'O melhor cappuccino que já tomei! O Keys Café superou minhas expectativas. Ambiente agradável e serviço de alta qualidade.',
-    image: 'https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=200&h=200&fit=facearea&facepad=2&q=80', // updated imagem masculina
+    image: 'https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=200&h=200&fit=facearea&facepad=2&q=80',
     rating: 4,
   },
   {
