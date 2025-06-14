@@ -22,19 +22,19 @@ const Footer = () => {
     {
       name: 'Facebook',
       icon: Facebook,
-      href: 'https://facebook.com/cafedahora',
+      href: 'https://facebook.com/keyscafe',
       ariaLabel: 'Visite nossa página no Facebook'
     },
     {
       name: 'Instagram',
       icon: Instagram,
-      href: 'https://instagram.com/cafedahora',
+      href: 'https://instagram.com/keyscafe',
       ariaLabel: 'Siga-nos no Instagram'
     },
     {
       name: 'YouTube',
       icon: Youtube,
-      href: 'https://youtube.com/cafedahora',
+      href: 'https://youtube.com/keyscafe',
       ariaLabel: 'Assista nossos vídeos no YouTube'
     }
   ];
@@ -47,37 +47,38 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-coffee-900 text-white" role="contentinfo">
+    <footer className="bg-coffee-900 text-white animate-fade-in-on-scroll" role="contentinfo">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer Content */}
         <div className="py-16 grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand Section */}
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-1 animate-slide-in-left">
             <div className="flex items-center space-x-2 mb-6">
-              <div className="bg-coffee-500 p-2 rounded-full">
-                <Coffee className="h-6 w-6 text-white" aria-hidden="true" />
+              <div className="bg-coffee-500 p-2 rounded-full hover:bg-coffee-400 transition-all duration-300 hover:scale-110 animate-pulse-subtle">
+                <Coffee className="h-6 w-6 text-white animate-spin-slow" aria-hidden="true" />
               </div>
-              <h3 className="font-playfair text-2xl font-bold">Café da Hora</h3>
+              <h3 className="font-playfair text-2xl font-bold hover:text-coffee-300 transition-colors duration-300">Keys Café</h3>
             </div>
-            <p className="font-inter text-coffee-200 leading-relaxed mb-6">
+            <p className="font-inter text-coffee-200 leading-relaxed mb-6 animate-fade-in-up animation-delay-200">
               Há mais de 15 anos servindo o melhor café artesanal da cidade. 
               Qualidade, tradição e sabor em cada xícara.
             </p>
             
             {/* Social Media */}
             <div className="space-y-3">
-              <h4 className="font-inter font-semibold text-lg mb-3">Redes Sociais</h4>
+              <h4 className="font-inter font-semibold text-lg mb-3 animate-fade-in-up animation-delay-300">Redes Sociais</h4>
               <div className="flex space-x-4">
-                {socialLinks.map((social) => (
+                {socialLinks.map((social, index) => (
                   <a
                     key={social.name}
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-coffee-800 hover:bg-coffee-700 p-3 rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-coffee-500 focus:ring-offset-2 focus:ring-offset-coffee-900"
+                    className="bg-coffee-800 hover:bg-coffee-700 p-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-coffee-500 focus:ring-offset-2 focus:ring-offset-coffee-900 hover:scale-110 animate-bounce-subtle"
+                    style={{ animationDelay: `${400 + index * 100}ms` }}
                     aria-label={social.ariaLabel}
                   >
-                    <social.icon className="h-5 w-5" aria-hidden="true" />
+                    <social.icon className="h-5 w-5 hover:animate-spin-once" aria-hidden="true" />
                   </a>
                 ))}
               </div>
@@ -85,15 +86,15 @@ const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <div>
-            <h4 className="font-inter font-semibold text-lg mb-6">Links Rápidos</h4>
+          <div className="animate-slide-in-up animation-delay-200">
+            <h4 className="font-inter font-semibold text-lg mb-6 animate-fade-in-up">Links Rápidos</h4>
             <nav aria-label="Links rápidos do footer">
               <ul className="space-y-3">
-                {quickLinks.map((link) => (
-                  <li key={link.name}>
+                {quickLinks.map((link, index) => (
+                  <li key={link.name} className="animate-fade-in-left" style={{ animationDelay: `${300 + index * 100}ms` }}>
                     <button
                       onClick={() => scrollToSection(link.href)}
-                      className="font-inter text-coffee-200 hover:text-white transition-colors duration-200 focus:outline-none focus:underline"
+                      className="font-inter text-coffee-200 hover:text-white transition-all duration-300 focus:outline-none focus:underline hover:translate-x-2"
                     >
                       {link.name}
                     </button>
@@ -104,11 +105,11 @@ const Footer = () => {
           </div>
 
           {/* Services */}
-          <div>
-            <h4 className="font-inter font-semibold text-lg mb-6">Nossos Serviços</h4>
+          <div className="animate-slide-in-up animation-delay-400">
+            <h4 className="font-inter font-semibold text-lg mb-6 animate-fade-in-up">Nossos Serviços</h4>
             <ul className="space-y-3">
-              {services.map((service) => (
-                <li key={service} className="font-inter text-coffee-200">
+              {services.map((service, index) => (
+                <li key={service} className="font-inter text-coffee-200 hover:text-white transition-colors duration-300 animate-fade-in-left" style={{ animationDelay: `${500 + index * 100}ms` }}>
                   {service}
                 </li>
               ))}
@@ -116,11 +117,11 @@ const Footer = () => {
           </div>
 
           {/* Contact Info */}
-          <div>
-            <h4 className="font-inter font-semibold text-lg mb-6">Contato</h4>
+          <div className="animate-slide-in-right animation-delay-600">
+            <h4 className="font-inter font-semibold text-lg mb-6 animate-fade-in-up">Contato</h4>
             <div className="space-y-4">
-              <div className="flex items-start space-x-3">
-                <MapPin className="h-5 w-5 text-coffee-400 mt-1 flex-shrink-0" aria-hidden="true" />
+              <div className="flex items-start space-x-3 animate-fade-in-up animation-delay-700">
+                <MapPin className="h-5 w-5 text-coffee-400 mt-1 flex-shrink-0 animate-bounce-subtle" aria-hidden="true" />
                 <address className="font-inter text-coffee-200 not-italic">
                   Rua dos Cafés, 123<br />
                   Vila Madalena, São Paulo - SP<br />
@@ -128,17 +129,17 @@ const Footer = () => {
                 </address>
               </div>
               
-              <div className="flex items-center space-x-3">
-                <Phone className="h-5 w-5 text-coffee-400 flex-shrink-0" aria-hidden="true" />
+              <div className="flex items-center space-x-3 animate-fade-in-up animation-delay-800">
+                <Phone className="h-5 w-5 text-coffee-400 flex-shrink-0 animate-wiggle" aria-hidden="true" />
                 <div className="font-inter text-coffee-200">
-                  <a href="tel:+5511999999999" className="hover:text-white transition-colors">
+                  <a href="tel:+5511999999999" className="hover:text-white transition-colors duration-300">
                     (11) 99999-9999
                   </a>
                 </div>
               </div>
               
-              <div className="flex items-start space-x-3">
-                <Clock className="h-5 w-5 text-coffee-400 mt-1 flex-shrink-0" aria-hidden="true" />
+              <div className="flex items-start space-x-3 animate-fade-in-up animation-delay-900">
+                <Clock className="h-5 w-5 text-coffee-400 mt-1 flex-shrink-0 animate-spin-slow" aria-hidden="true" />
                 <div className="font-inter text-coffee-200">
                   <p>Seg - Sex: 7h às 19h</p>
                   <p>Sáb - Dom: 8h às 18h</p>
@@ -149,28 +150,28 @@ const Footer = () => {
         </div>
 
         {/* Bottom Footer */}
-        <div className="border-t border-coffee-800 py-8">
+        <div className="border-t border-coffee-800 py-8 animate-fade-in-up animation-delay-1000">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="font-inter text-coffee-300 text-center md:text-left">
-              <p>&copy; 2024 Café da Hora. Todos os direitos reservados.</p>
+              <p>&copy; 2024 Keys Café. Todos os direitos reservados.</p>
             </div>
             
             <div className="flex flex-wrap justify-center md:justify-end space-x-6 text-sm">
-              <a href="#" className="font-inter text-coffee-300 hover:text-white transition-colors focus:outline-none focus:underline">
+              <a href="#" className="font-inter text-coffee-300 hover:text-white transition-colors focus:outline-none focus:underline hover:animate-pulse">
                 Política de Privacidade
               </a>
-              <a href="#" className="font-inter text-coffee-300 hover:text-white transition-colors focus:outline-none focus:underline">
+              <a href="#" className="font-inter text-coffee-300 hover:text-white transition-colors focus:outline-none focus:underline hover:animate-pulse">
                 Termos de Uso
               </a>
-              <a href="/sitemap.xml" className="font-inter text-coffee-300 hover:text-white transition-colors focus:outline-none focus:underline">
+              <a href="/sitemap.xml" className="font-inter text-coffee-300 hover:text-white transition-colors focus:outline-none focus:underline hover:animate-pulse">
                 Mapa do Site
               </a>
             </div>
           </div>
           
           {/* Credits */}
-          <div className="mt-4 text-center">
-            <p className="font-inter text-coffee-400 text-sm">
+          <div className="mt-4 text-center animate-fade-in-up animation-delay-1200">
+            <p className="font-inter text-coffee-400 text-sm animate-pulse-subtle">
               Desenvolvido com ❤️ para os amantes de café
             </p>
           </div>
