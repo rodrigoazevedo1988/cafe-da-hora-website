@@ -1,19 +1,19 @@
 
 import React, { useRef, useEffect } from 'react';
 
-// Novo hook para contagem animada bem visível
+// Hook para contagem animada dos números
 function useAnimatedCountUp(to: number, duration = 1200, decimal = false) {
   const ref = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     let raf: number;
     const startTime = performance.now();
-    const dec = decimal ? 1 : 0;
     function step(now: number) {
       const progress = Math.min((now - startTime) / duration, 1);
-      const value = decimal
+      let value = decimal
         ? +(progress * to)
         : Math.floor(progress * to);
+
       if (ref.current) {
         ref.current.innerText = decimal ? value.toFixed(1) : `${value}`;
       }
@@ -55,19 +55,19 @@ const AboutSection = () => {
         <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
           <div className="flex-1 animate-fade-slide-in animation-delay-600">
             <strong className="text-3xl text-coffee-500 block font-playfair mb-2 animate-count-up-highlight">
-              +<span ref={anosRef} className="animate-fade-slide-in" />
+              +<span ref={anosRef} className="animate-count-up" />
             </strong>
             <span className="text-gray-800 font-inter font-semibold">anos de tradição</span>
           </div>
           <div className="flex-1 animate-fade-slide-in animation-delay-800">
             <strong className="text-3xl text-coffee-500 block font-playfair mb-2 animate-count-up-highlight">
-              +<span ref={cafesRef} className="animate-fade-slide-in" />
+              +<span ref={cafesRef} className="animate-count-up" />
             </strong>
             <span className="text-gray-800 font-inter font-semibold">cafés e receitas</span>
           </div>
           <div className="flex-1 animate-fade-slide-in animation-delay-1000">
             <strong className="text-3xl text-coffee-500 block font-playfair mb-2 animate-count-up-highlight">
-              +<span ref={avaliacaoRef} className="animate-fade-slide-in" />
+              +<span ref={avaliacaoRef} className="animate-count-up" />
             </strong>
             <span className="text-gray-800 font-inter font-semibold">de avaliação</span>
           </div>
