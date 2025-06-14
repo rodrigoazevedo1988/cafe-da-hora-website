@@ -1,6 +1,6 @@
 
-import { ArrowDown } from "lucide-react";
 import AnimatedCoffeeIcon from "./AnimatedCoffeeIcon";
+import { ArrowDown } from "lucide-react";
 
 const HeroSection = () => {
   const scrollToProducts = () => {
@@ -16,7 +16,7 @@ const HeroSection = () => {
       className="relative min-h-screen flex items-center justify-center bg-gradient-to-r from-coffee-50 to-coffee-100 animate-gradient-shift"
       role="banner"
     >
-      {/* Background Image */}
+      {/* Imagem de Fundo */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20 animate-ken-burns"
         style={{
@@ -25,7 +25,7 @@ const HeroSection = () => {
         aria-hidden="true"
       />
 
-      {/* Skip Link for Accessibility */}
+      {/* Skip Link para Acessibilidade */}
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-coffee-500 text-white px-4 py-2 rounded-md z-50 animate-fade-in"
@@ -34,7 +34,7 @@ const HeroSection = () => {
       </a>
 
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        {/* Ícone de café animado */}
+        {/* Ícone animado de café */}
         <div className="flex justify-center mb-4">
           <AnimatedCoffeeIcon />
         </div>
