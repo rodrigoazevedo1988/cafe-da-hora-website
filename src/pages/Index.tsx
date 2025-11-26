@@ -9,7 +9,7 @@ import Footer from '../components/Footer';
 
 const Index = () => {
   return (
-    <div className="min-h-screen font-inter">
+    <div className="min-h-screen font-inter bg-white dark:bg-coffee-950 transition-colors duration-300">
       <Header />
       <main id="main-content" role="main">
         <HeroSection />

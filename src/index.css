@@ -665,4 +665,190 @@
     60% {opacity: 0.6; filter: blur(3.2px);}
     100% {opacity: 0.18; filter: blur(1.8px);}
   }
+
+  /* Text animations */
+  .animate-text-shimmer {
+    background: linear-gradient(90deg, #8B4513 0%, #D4915A 50%, #8B4513 100%);
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: text-shimmer 3s linear infinite;
+  }
+  @keyframes text-shimmer {
+    to {
+      background-position: 200% center;
+    }
+  }
+
+  .animate-text-glow {
+    animation: text-glow 2s ease-in-out infinite alternate;
+  }
+  @keyframes text-glow {
+    from {
+      text-shadow: 0 0 10px rgba(139, 69, 19, 0.5), 0 0 20px rgba(139, 69, 19, 0.3);
+    }
+    to {
+      text-shadow: 0 0 20px rgba(139, 69, 19, 0.8), 0 0 30px rgba(139, 69, 19, 0.5), 0 0 40px rgba(139, 69, 19, 0.3);
+    }
+  }
+
+  .animate-text-reveal {
+    animation: text-reveal 1.5s ease-out forwards;
+  }
+  @keyframes text-reveal {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+      clip-path: inset(0 0 100% 0);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+      clip-path: inset(0 0 0% 0);
+    }
+  }
+
+  /* Hover effects */
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(139, 69, 19, 0.2);
+  }
+
+  .hover-glow {
+    transition: box-shadow 0.3s ease;
+  }
+  .hover-glow:hover {
+    box-shadow: 0 0 20px rgba(139, 69, 19, 0.4), 0 0 40px rgba(139, 69, 19, 0.2);
+  }
+
+  .hover-scale {
+    transition: transform 0.3s ease;
+  }
+  .hover-scale:hover {
+    transform: scale(1.05);
+  }
+
+  .hover-rotate {
+    transition: transform 0.3s ease;
+  }
+  .hover-rotate:hover {
+    transform: rotate(5deg) scale(1.05);
+  }
+
+  /* Button animations */
+  .btn-shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-shimmer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+  }
+  .btn-shimmer:hover::before {
+    left: 100%;
+  }
+
+  .btn-pulse {
+    animation: btn-pulse 2s ease-in-out infinite;
+  }
+  @keyframes btn-pulse {
+    0%, 100% {
+      box-shadow: 0 0 0 0 rgba(139, 69, 19, 0.7);
+    }
+    50% {
+      box-shadow: 0 0 0 10px rgba(139, 69, 19, 0);
+    }
+  }
+
+  /* Card animations */
+  .card-hover {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  .card-hover:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 25px 50px rgba(139, 69, 19, 0.25);
+  }
+
+  .card-image-zoom {
+    overflow: hidden;
+  }
+  .card-image-zoom img {
+    transition: transform 0.6s ease;
+  }
+  .card-image-zoom:hover img {
+    transform: scale(1.15);
+  }
+
+  /* Gradient text */
+  .text-gradient {
+    background: linear-gradient(135deg, #8B4513 0%, #D4915A 50%, #8B4513 100%);
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-shift 3s linear infinite;
+  }
+
+  /* Scroll reveal */
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Loading shimmer */
+  .shimmer {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  /* Magnetic effect */
+  .magnetic {
+    transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  /* Ripple effect */
+  .ripple {
+    position: relative;
+    overflow: hidden;
+  }
+  .ripple::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+  .ripple:active::after {
+    width: 300px;
+    height: 300px;
+  }
 }

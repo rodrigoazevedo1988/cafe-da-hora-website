@@ -1,36 +1,39 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu, Coffee, X, Moon, Sun } from 'lucide-react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [dark, setDark] = useState(
-    typeof window !== "undefined" && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-  );
+  const [dark, setDark] = useState(false);
+
+  // Aplica o tema salvo ao montar o componente
+  useEffect(() => {
+    const theme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const isDark = theme === 'dark' || (!theme && prefersDark);
+    
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+      setDark(true);
+    } else {
+      document.documentElement.classList.remove('dark');
+      setDark(false);
+    }
+  }, []);
 
   // Alternar tema (dark/light)
   const toggleTheme = () => {
-    const root = window.document.documentElement;
+    const root = document.documentElement;
     if (dark) {
       root.classList.remove("dark");
-      localStorage.theme = 'light';
+      localStorage.setItem('theme', 'light');
       setDark(false);
     } else {
       root.classList.add("dark");
-      localStorage.theme = 'dark';
+      localStorage.setItem('theme', 'dark');
       setDark(true);
     }
   };
-
-  // Aplica o tema salvo ao montar o componente (client only)
-  if (typeof window !== 'undefined') {
-    if (localStorage.theme === 'dark') {
-      window.document.documentElement.classList.add('dark');
-    }
-    if (localStorage.theme === 'light') {
-      window.document.documentElement.classList.remove('dark');
-    }
-  }
 
   const navigationItems = [
     { name: 'Início', href: '#home' },
@@ -74,10 +77,11 @@ const Header = () => {
               <button
                 key={item.name}
                 onClick={() => scrollToSection(item.href)}
-                className="text-gray-700 dark:text-gray-200 hover:text-coffee-500 dark:hover:text-coffee-300 font-inter font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-coffee-500 focus:ring-offset-2 rounded-md px-2 py-1 hover:scale-105 animate-fade-in-up"
+                className="relative text-gray-700 dark:text-gray-200 hover:text-coffee-500 dark:hover:text-coffee-300 font-inter font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-coffee-500 focus:ring-offset-2 rounded-md px-2 py-1 hover:scale-110 animate-fade-in-up group"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                {item.name}
+                <span className="relative z-10">{item.name}</span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-coffee-500 group-hover:w-full transition-all duration-300"></span>
               </button>
             ))}
             {/* Switch de Tema */}
@@ -97,7 +101,7 @@ const Header = () => {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 rounded-md text-gray-700 hover:text-coffee-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-coffee-500 focus:ring-offset-2 transition-all duration-300 hover:scale-110"
+            className="md:hidden p-2 rounded-md text-gray-700 dark:text-gray-200 hover:text-coffee-500 hover:bg-gray-100 dark:hover:bg-coffee-800 focus:outline-none focus:ring-2 focus:ring-coffee-500 focus:ring-offset-2 transition-all duration-300 hover:scale-110"
             aria-expanded={isMenuOpen}
             aria-controls="mobile-menu"
             aria-label="Abrir menu de navegação"
