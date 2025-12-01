@@ -1,5 +1,6 @@
 // Cliente RaDB para backend/admin (service role key)
-const RADB_URL = import.meta.env.VITE_RADB_URL || import.meta.env.NEXT_PUBLIC_RADB_URL || '';
+const RADB_BASE_URL = import.meta.env.VITE_RADB_URL || import.meta.env.NEXT_PUBLIC_RADB_URL || '';
+const RADB_URL = RADB_BASE_URL ? `${RADB_BASE_URL}/api/v1` : '';
 const RADB_SERVICE_ROLE_KEY = import.meta.env.VITE_RADB_SERVICE_ROLE_KEY || import.meta.env.RADB_SERVICE_ROLE_KEY || '';
 
 // Reutilizar a mesma estrutura do radb.ts mas com service role key
@@ -199,7 +200,7 @@ class RaDBUpdateBuilder implements UpdateBuilder {
 
   async execute(): Promise<{ data: any; error: any }> {
     try {
-      let url = `${RADB_URL}/api/${this.table}`;
+      let url = `${RADB_URL}/rest/v1/${this.table}`;
       
       if (this.filters.size > 0) {
         const [column, value] = Array.from(this.filters.entries())[0];
@@ -260,7 +261,7 @@ class RaDBDeleteBuilder implements DeleteBuilder {
 
   async execute(): Promise<{ data: any; error: any }> {
     try {
-      let url = `${RADB_URL}/api/${this.table}`;
+      let url = `${RADB_URL}/rest/v1/${this.table}`;
       
       if (this.filters.size > 0) {
         const [column, value] = Array.from(this.filters.entries())[0];
@@ -339,7 +340,7 @@ export const radbAdmin: RaDBAdminClient = {
             const formData = new FormData();
             formData.append('file', file);
 
-            const response = await fetch(`${RADB_URL}/storage/v1/object/${bucket}/${path}`, {
+            const response = await fetch(`${RADB_URL}/storage/${bucket}/${path}`, {
               method: 'POST',
               headers: {
                 'Authorization': `Bearer ${RADB_SERVICE_ROLE_KEY}`,
@@ -359,12 +360,12 @@ export const radbAdmin: RaDBAdminClient = {
           }
         },
         getPublicUrl(path: string) {
-          const publicUrl = `${RADB_URL}/storage/v1/object/public/${bucket}/${path}`;
+          const publicUrl = `${RADB_BASE_URL}/storage/v1/object/public/${bucket}/${path}`;
           return { data: { publicUrl } };
         },
         async download(path: string) {
           try {
-            const response = await fetch(`${RADB_URL}/storage/v1/object/${bucket}/${path}`, {
+            const response = await fetch(`${RADB_URL}/storage/${bucket}/${path}`, {
               headers: {
                 'Authorization': `Bearer ${RADB_SERVICE_ROLE_KEY}`,
               },
@@ -382,7 +383,7 @@ export const radbAdmin: RaDBAdminClient = {
         },
         async remove(paths: string[]) {
           try {
-            const response = await fetch(`${RADB_URL}/storage/v1/object/${bucket}`, {
+            const response = await fetch(`${RADB_URL}/storage/${bucket}`, {
               method: 'DELETE',
               headers: {
                 'Authorization': `Bearer ${RADB_SERVICE_ROLE_KEY}`,

@@ -1,5 +1,7 @@
 
 import React, { useRef, useEffect, useState } from 'react';
+import { useSection } from '@/hooks/useCMS';
+import type { AboutSectionContent } from '@/types/cms';
 
 // Hook animador dos big numbers
 function useAnimatedCountUp(to: number, duration = 1200, decimal = false) {
@@ -51,9 +53,30 @@ function useAnimatedCountUp(to: number, duration = 1200, decimal = false) {
 }
 
 const AboutSection = () => {
-  const anosRef = useAnimatedCountUp(10, 1500);
-  const cafesRef = useAnimatedCountUp(50, 1400);
-  const avaliacaoRef = useAnimatedCountUp(4.5, 1800, true);
+  const { data: section } = useSection('about');
+  const defaultContent: AboutSectionContent = {
+    title: 'Sobre o Keys Café',
+    description: 'Tradicional, acolhedor e inovador: somos apaixonados por café e por criar experiências únicas. Desde o aroma fresco da manhã até aquele espresso perfeito para encerrar o dia, o Keys Café é seu lugar para momentos especiais.',
+    stats: {
+      years: 10,
+      yearsLabel: 'anos de tradição',
+      coffees: 50,
+      coffeesLabel: 'cafés e receitas',
+      rating: 4.5,
+      ratingLabel: 'de avaliação',
+    },
+  };
+  
+  const sectionContent = section?.content as AboutSectionContent | undefined;
+  const content: AboutSectionContent = {
+    title: sectionContent?.title || defaultContent.title,
+    description: sectionContent?.description || defaultContent.description,
+    stats: sectionContent?.stats || defaultContent.stats,
+  };
+
+  const anosRef = useAnimatedCountUp(content.stats.years, 1500);
+  const cafesRef = useAnimatedCountUp(content.stats.coffees, 1400);
+  const avaliacaoRef = useAnimatedCountUp(content.stats.rating, 1800, true);
 
   return (
     <section
@@ -67,30 +90,29 @@ const AboutSection = () => {
           className="font-playfair text-3xl lg:text-section-title font-bold text-coffee-600 dark:text-coffee-300 mb-6 opacity-0 animate-fade-in text-gradient"
           style={{ animationFillMode: 'forwards' }}
         >
-          Sobre o Keys Café
+          {content.title}
         </h2>
         <p className="font-inter text-lg text-gray-700 dark:text-gray-200 mx-auto mb-8 max-w-2xl leading-relaxed opacity-0 animate-fade-in" style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}>
-          Tradicional, acolhedor e inovador: somos apaixonados por café e por criar experiências únicas.
-          Desde o aroma fresco da manhã até aquele espresso perfeito para encerrar o dia, o Keys Café é seu lugar para momentos especiais.
+          {content.description}
         </p>
         <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
           <div className="flex-1 opacity-0 animate-fade-in hover-lift cursor-default" style={{ animationDelay: '0.3s', animationFillMode: 'forwards' }}>
             <strong className="text-3xl text-coffee-500 dark:text-coffee-400 block font-playfair mb-2 hover:scale-110 transition-transform inline-block">
               +<span ref={anosRef}>10</span>
             </strong>
-            <span className="text-gray-800 dark:text-gray-200 font-inter font-semibold">anos de tradição</span>
+            <span className="text-gray-800 dark:text-gray-200 font-inter font-semibold">{content.stats.yearsLabel}</span>
           </div>
           <div className="flex-1 opacity-0 animate-fade-in hover-lift cursor-default" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
             <strong className="text-3xl text-coffee-500 dark:text-coffee-400 block font-playfair mb-2 hover:scale-110 transition-transform inline-block">
-              +<span ref={cafesRef}>50</span>
+              +<span ref={cafesRef}>{content.stats.coffees}</span>
             </strong>
-            <span className="text-gray-800 dark:text-gray-200 font-inter font-semibold">cafés e receitas</span>
+            <span className="text-gray-800 dark:text-gray-200 font-inter font-semibold">{content.stats.coffeesLabel}</span>
           </div>
           <div className="flex-1 opacity-0 animate-fade-in hover-lift cursor-default" style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}>
             <strong className="text-3xl text-coffee-500 dark:text-coffee-400 block font-playfair mb-2 hover:scale-110 transition-transform inline-block">
-              +<span ref={avaliacaoRef}>4.5</span>
+              +<span ref={avaliacaoRef}>{content.stats.rating}</span>
             </strong>
-            <span className="text-gray-800 dark:text-gray-200 font-inter font-semibold">de avaliação</span>
+            <span className="text-gray-800 dark:text-gray-200 font-inter font-semibold">{content.stats.ratingLabel}</span>
           </div>
         </div>
       </div>

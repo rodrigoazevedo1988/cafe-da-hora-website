@@ -2,8 +2,20 @@
 import React, { useState } from 'react';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useSection } from '@/hooks/useCMS';
+import type { ContactSectionContent } from '@/types/cms';
 
 const ContactSection = () => {
+  const { data: section } = useSection('contact');
+  const content = (section?.content as ContactSectionContent) || {
+    title: 'Entre em Contato',
+    description: 'Estamos sempre prontos para atendê-lo. Entre em contato conosco para dúvidas, sugestões ou para reservar sua mesa.',
+    email: 'contato@keyscafe.com.br',
+    phone: '(99) 99999-9999',
+    address: 'Rua dos Grãos, 123\nCentro, Sua Cidade - Brasil',
+    formFields: [],
+  };
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -37,10 +49,10 @@ const ContactSection = () => {
             className="font-playfair text-3xl lg:text-section-title font-bold text-coffee-600 dark:text-coffee-300 mb-6 opacity-0 animate-fade-in text-gradient"
             style={{ animationFillMode: 'forwards' }}
           >
-            Entre em Contato
+            {content.title}
           </h2>
           <p className="font-inter text-lg text-gray-700 dark:text-gray-200 max-w-2xl mx-auto opacity-0 animate-fade-in" style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}>
-            Estamos sempre prontos para atendê-lo. Entre em contato conosco para dúvidas, sugestões ou para reservar sua mesa.
+            {content.description}
           </p>
         </div>
 
@@ -57,7 +69,7 @@ const ContactSection = () => {
                   <MapPin className="h-6 w-6 text-coffee-500 dark:text-coffee-400 mt-1 flex-shrink-0" />
                   <div>
                     <h4 className="font-inter font-semibold text-gray-900 dark:text-gray-100">Endereço</h4>
-                    <p className="text-gray-600 dark:text-gray-300">Rua dos Grãos, 123<br />Centro, Sua Cidade - Brasil</p>
+                    <p className="text-gray-600 dark:text-gray-300 whitespace-pre-line">{content.address}</p>
                   </div>
                 </div>
                 
@@ -65,7 +77,7 @@ const ContactSection = () => {
                   <Phone className="h-6 w-6 text-coffee-500 dark:text-coffee-400 mt-1 flex-shrink-0" />
                   <div>
                     <h4 className="font-inter font-semibold text-gray-900 dark:text-gray-100">Telefone</h4>
-                    <p className="text-gray-600 dark:text-gray-300">(99) 99999-9999</p>
+                    <p className="text-gray-600 dark:text-gray-300">{content.phone}</p>
                   </div>
                 </div>
                 
@@ -73,7 +85,7 @@ const ContactSection = () => {
                   <Mail className="h-6 w-6 text-coffee-500 dark:text-coffee-400 mt-1 flex-shrink-0" />
                   <div>
                     <h4 className="font-inter font-semibold text-gray-900 dark:text-gray-100">E-mail</h4>
-                    <p className="text-gray-600 dark:text-gray-300">contato@keyscafe.com.br</p>
+                    <p className="text-gray-600 dark:text-gray-300">{content.email}</p>
                   </div>
                 </div>
                 
